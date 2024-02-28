@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizapp/questionlist.dart';
 
 class Ques extends StatefulWidget {
   const Ques({Key? key}) : super(key: key);
@@ -7,7 +8,29 @@ class Ques extends StatefulWidget {
   State<Ques> createState() => _QuesState();
 }
 
+
 class _QuesState extends State<Ques> {
+  List question=[
+    Quiz(ques:'car have 4 wheels',ans:true),
+    Quiz(ques: 'diya is good girl',ans: true),
+    Quiz(ques:'bike has 3 wheels',ans:false),
+    Quiz(ques:'sky color is green',ans:false),
+    Quiz(ques:'In kerala, there are 14 district',ans:true),
+    Quiz(ques:'cat has 2 legs',ans:false),
+    Quiz(ques:'human can fly',ans:false),
+    Quiz(ques:'mannummel boys is a flop film',ans:false),
+    Quiz(ques:'devagiri college located in kozhikode',ans:true),
+    Quiz(ques:'birds can fly',ans:true),
+  ];
+  int question_no=0;
+  void nextQues(){
+    if (question_no<question.length){
+      question_no++;
+    }
+  }
+  String getQues(){
+    return question[question_no].ques;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +40,7 @@ class _QuesState extends State<Ques> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: 50,),
-            Text('flutter is an open source framework by google ',
+            Text(question[question_no].ques,
               style: TextStyle(fontSize: 28, color: Colors.white)),
             SizedBox(height: 100,),
             Container(
@@ -25,14 +48,18 @@ class _QuesState extends State<Ques> {
               width: 200,
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: Colors.green),
-                onPressed: () {}, child: Text('TRUE'))),
+                onPressed: () {setState((){
+                  nextQues();
+                });}, child: Text('TRUE'))),
             SizedBox(height: 25,),
             Container(
               height: 50,
               width: 200,
            child: ElevatedButton(
                style: ElevatedButton.styleFrom(primary: Colors.red),
-               onPressed: () {}, child: Text('FALSE'))),
+               onPressed: () {setState((){
+                 nextQues();
+               });}, child: Text('FALSE'))),
           ],
         ),
       ),
