@@ -23,6 +23,7 @@ class _QuesState extends State<Ques> {
     Quiz(ques:'birds can fly',ans:true),
   ];
   int question_no=0;
+  String result='';
   void nextQues(){
     if (question_no<question.length){
       question_no++;
@@ -30,6 +31,17 @@ class _QuesState extends State<Ques> {
   }
   String getQues(){
     return question[question_no].ques;
+  }
+  void check(bool answer){
+    print(answer);
+    if(answer==question[question_no].ans){
+      result='correct answer';
+
+    }
+    else{
+      result='wrong answer';
+
+    }
   }
   @override
   Widget build(BuildContext context) {
@@ -49,6 +61,8 @@ class _QuesState extends State<Ques> {
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: Colors.green),
                 onPressed: () {setState((){
+
+                  check(true);
                   nextQues();
                 });}, child: Text('TRUE'))),
             SizedBox(height: 25,),
@@ -58,8 +72,12 @@ class _QuesState extends State<Ques> {
            child: ElevatedButton(
                style: ElevatedButton.styleFrom(primary: Colors.red),
                onPressed: () {setState((){
+
+                 check(false);
                  nextQues();
                });}, child: Text('FALSE'))),
+            SizedBox(height: 20,),
+            Text(result,style: TextStyle(color: Colors.white,fontSize: 25),),
           ],
         ),
       ),
